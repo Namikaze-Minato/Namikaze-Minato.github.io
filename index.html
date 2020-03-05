@@ -277,6 +277,163 @@
 
 
   
+    <article id="post-MapReduce执行流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2018/03/18/MapReduce%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/" target="_blank">MapReduce执行流程</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2018/03/18/MapReduce%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/" class="archive-article-date">
+        <time datetime="2018-03-18T02:06:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="MapReduce编程"><a href="#MapReduce编程" class="headerlink" title="MapReduce编程"></a><strong>MapReduce编程</strong></h1><p>MapReduce 是一个分布式计算框架。</p>
+<p>easily writing applications</p>
+<p>​        1）真的容易吗？ 否定的！！！</p>
+<p>​        2）内置提供了我们不少的核心组件，我们只要按照它的规范进行应用程序的开发</p>
+<p>​        你写代码的时候就感觉是和写单机的代码一样</p>
+<p>​        把我们的业务逻辑代码 + 框架自身的功能 ==&gt; 应用程序 提交到服务器上运行</p>
+<p>​    优点：扩展性、容错性、数据量级、批/离线处理(要处理的数据是固定的)</p>
+<p>​    缺点：</p>
+<p>​        慢：模型（Task是进程级别）、磁盘、IO</p>
+<p>​        不适合实时/流式：数据源是源源不断的</p>
+<p>​        不适合多次迭代</p>
+<h2 id="wordcount-词频统计"><a href="#wordcount-词频统计" class="headerlink" title="wordcount: 词频统计"></a>wordcount: 词频统计</h2><p>一组文件，求每个单词出现的次数</p>
+<p>2个文件</p>
+<p>1）把文件的内容读取处理，按照分隔符进行切分</p>
+<p>2）每个单词赋值为1</p>
+<p>ruoze,ruoze,ruoze</p>
+<p>pk,pk</p>
+<p>xingxing</p>
+<p>(ruoze,1)</p>
+<p>(ruoze,1)</p>
+<p>(ruoze,1)</p>
+<p>(pk,1)</p>
+<p>(pk,1)</p>
+<p>(xingxing,1)</p>
+<p>map ==&gt; reduce  shuffle:相同的key被分发到同一个reduce</p>
+<p>3) reduce</p>
+<p>（key,(1,1,1,1)）</p>
+<p>key: 1+1+1+1=4</p>
+<p>int   ==&gt; IntWritable</p>
+<p>float     FloatWritable</p>
+<p>long      Long….</p>
+<p>double    Double….</p>
+<p>String    Text</p>
+<p>yarn jar</p>
+<p>hadoop jar /home/hadoop/lib/ruozedata-hadoop-1.0.jar com.ruozedata.bigdata.hadoop.mapreduce.wc.WCDriverV2 /ruozedata/wc/input/  /ruozedata/wc/output/</p>
+<p>Maps input key/value pairs to a set of intermediate key/value pairs.</p>
+<p>​    key: offset</p>
+<p>​    value: row record</p>
+<p>​    key：word</p>
+<p>​    value：1</p>
+<p><strong>模板/模板方法设计模式</strong></p>
+<p>​    预先把整个执行流程定义好</p>
+<p>​    执行的时候就按照预先定义好的流程按顺序执行</p>
+<p>​    定义了生命周期： Mapper和Reducer都有的</p>
+<p>​        setup   做初始化的，比如获取connection、创建IO流</p>
+<p>​        map/reduce</p>
+<p>​        cleanup  做资源释放的，比如释放Connection、关闭IO流</p>
+<p>细品</p>
+<p>int maps = writeSplits(job, submitJobDir);</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><strong>源码走读流程：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">job.waitForCompletion&#123;</span><br><span class="line"><span class="comment">//任务提交</span></span><br><span class="line">    submit()&#123;</span><br><span class="line">        setUseNewAPI();  <span class="comment">// 新老API的兼容</span></span><br><span class="line">        connect()&#123;</span><br><span class="line">            <span class="keyword">new</span> Cluster() <span class="comment">// Local或者服务器</span></span><br><span class="line">        &#125;</span><br><span class="line">        JobSubmitter submitter <span class="comment">// 后面提交作业使用的</span></span><br><span class="line">        submitter.submitJobInternal()&#123;</span><br><span class="line">            checkSpecs(job); <span class="comment">// 有没有配置输出，输出路径检查...</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 把该作业的配置信息加到分布式缓存中</span></span><br><span class="line">            addMRFrameworkToDistributedCache(conf);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 创建该Job对应的存放目录</span></span><br><span class="line">            Path jobStagingArea</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拿过该Job对应的ID  local  application.....</span></span><br><span class="line">            JobID jobId</span><br><span class="line"></span><br><span class="line">            <span class="comment">// jobStagingArea/jobid</span></span><br><span class="line">            Path submitJobDir</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拷贝job对应的信息到jobStagingArea/jobid</span></span><br><span class="line">            copyAndConfigureFiles(job, submitJobDir);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// ***** 完成我们输入数据的切片</span></span><br><span class="line">            <span class="keyword">int</span> maps = writeSplits(job, submitJobDir);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Write job file to submit dir</span></span><br><span class="line">            writeConf(conf, submitJobFile);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 提交我们的作业</span></span><br><span class="line">            submitClient.submitJob</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    <div class="article-pop-out tagcloud">
+      <i class="icon-tuding"></i>
+      <a class="article-tag-list-link color3">置顶</a>
+    </div>
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Hadoop//" class="article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2018/03/18/MapReduce%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-博客第一篇文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -505,6 +662,14 @@
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">自述</a>

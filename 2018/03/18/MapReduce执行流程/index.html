@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | 不积跬步无以至千里</title>
+  <title>MapReduce执行流程 | 不积跬步无以至千里</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="日常工作问题总结">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不积跬步无以至千里">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="MapReduce编程MapReduce 是一个分布式计算框架。 easily writing applications ​        1）真的容易吗？ 否定的！！！ ​        2）内置提供了我们不少的核心组件，我们只要按照它的规范进行应用程序的开发 ​        你写代码的时候就感觉是和写单机的代码一样 ​        把我们的业务逻辑代码 + 框架自身的功能 &#x3D;&#x3D;&gt; 应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MapReduce执行流程">
+<meta property="og:url" content="http://yoursite.com/2018/03/18/MapReduce%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/index.html">
 <meta property="og:site_name" content="不积跬步无以至千里">
-<meta property="og:description" content="日常工作问题总结">
+<meta property="og:description" content="MapReduce编程MapReduce 是一个分布式计算框架。 easily writing applications ​        1）真的容易吗？ 否定的！！！ ​        2）内置提供了我们不少的核心组件，我们只要按照它的规范进行应用程序的开发 ​        你写代码的时候就感觉是和写单机的代码一样 ​        把我们的业务逻辑代码 + 框架自身的功能 &#x3D;&#x3D;&gt; 应">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-03-18T02:06:20.000Z">
+<meta property="article:modified_time" content="2020-03-05T06:55:42.352Z">
 <meta property="article:author" content="Namikaze Minato">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="大数据">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="不积跬步无以至千里" type="application/atom+xml">
@@ -183,54 +187,263 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-MapReduce执行流程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/02/hello-world/" class="archive-article-date">
-        <time datetime="2020-03-02T13:06:32.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-02</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/03/02/hello-world/" target="_blank">Hello World</a>
   
+    <h1 class="article-title" itemprop="name">
+      MapReduce执行流程
     </h1>
   
 
 
-        <div class="article-info info-on-right">
-          
-          
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<a href="/2018/03/18/MapReduce%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/" class="archive-article-date">
+        <time datetime="2018-03-18T02:06:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-18</time>
+</a>
+
   
   
-    </div></section>
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">584字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">2分</span>
+    </span>
+  </span>
+</div>
+
+
   
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="MapReduce编程"><a href="#MapReduce编程" class="headerlink" title="MapReduce编程"></a><strong>MapReduce编程</strong></h1><p>MapReduce 是一个分布式计算框架。</p>
+<p>easily writing applications</p>
+<p>​        1）真的容易吗？ 否定的！！！</p>
+<p>​        2）内置提供了我们不少的核心组件，我们只要按照它的规范进行应用程序的开发</p>
+<p>​        你写代码的时候就感觉是和写单机的代码一样</p>
+<p>​        把我们的业务逻辑代码 + 框架自身的功能 ==&gt; 应用程序 提交到服务器上运行</p>
+<p>​    优点：扩展性、容错性、数据量级、批/离线处理(要处理的数据是固定的)</p>
+<p>​    缺点：</p>
+<p>​        慢：模型（Task是进程级别）、磁盘、IO</p>
+<p>​        不适合实时/流式：数据源是源源不断的</p>
+<p>​        不适合多次迭代</p>
+<h2 id="wordcount-词频统计"><a href="#wordcount-词频统计" class="headerlink" title="wordcount: 词频统计"></a>wordcount: 词频统计</h2><p>一组文件，求每个单词出现的次数</p>
+<p>2个文件</p>
+<p>1）把文件的内容读取处理，按照分隔符进行切分</p>
+<p>2）每个单词赋值为1</p>
+<p>ruoze,ruoze,ruoze</p>
+<p>pk,pk</p>
+<p>xingxing</p>
+<p>(ruoze,1)</p>
+<p>(ruoze,1)</p>
+<p>(ruoze,1)</p>
+<p>(pk,1)</p>
+<p>(pk,1)</p>
+<p>(xingxing,1)</p>
+<p>map ==&gt; reduce  shuffle:相同的key被分发到同一个reduce</p>
+<p>3) reduce</p>
+<p>（key,(1,1,1,1)）</p>
+<p>key: 1+1+1+1=4</p>
+<p>int   ==&gt; IntWritable</p>
+<p>float     FloatWritable</p>
+<p>long      Long….</p>
+<p>double    Double….</p>
+<p>String    Text</p>
+<p>yarn jar</p>
+<p>hadoop jar /home/hadoop/lib/ruozedata-hadoop-1.0.jar com.ruozedata.bigdata.hadoop.mapreduce.wc.WCDriverV2 /ruozedata/wc/input/  /ruozedata/wc/output/</p>
+<p>Maps input key/value pairs to a set of intermediate key/value pairs.</p>
+<p>​    key: offset</p>
+<p>​    value: row record</p>
+<p>​    key：word</p>
+<p>​    value：1</p>
+<p><strong>模板/模板方法设计模式</strong></p>
+<p>​    预先把整个执行流程定义好</p>
+<p>​    执行的时候就按照预先定义好的流程按顺序执行</p>
+<p>​    定义了生命周期： Mapper和Reducer都有的</p>
+<p>​        setup   做初始化的，比如获取connection、创建IO流</p>
+<p>​        map/reduce</p>
+<p>​        cleanup  做资源释放的，比如释放Connection、关闭IO流</p>
+<p>细品</p>
+<p>int maps = writeSplits(job, submitJobDir);</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><strong>源码走读流程：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">job.waitForCompletion&#123;</span><br><span class="line"><span class="comment">//任务提交</span></span><br><span class="line">    submit()&#123;</span><br><span class="line">        setUseNewAPI();  <span class="comment">// 新老API的兼容</span></span><br><span class="line">        connect()&#123;</span><br><span class="line">            <span class="keyword">new</span> Cluster() <span class="comment">// Local或者服务器</span></span><br><span class="line">        &#125;</span><br><span class="line">        JobSubmitter submitter <span class="comment">// 后面提交作业使用的</span></span><br><span class="line">        submitter.submitJobInternal()&#123;</span><br><span class="line">            checkSpecs(job); <span class="comment">// 有没有配置输出，输出路径检查...</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 把该作业的配置信息加到分布式缓存中</span></span><br><span class="line">            addMRFrameworkToDistributedCache(conf);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 创建该Job对应的存放目录</span></span><br><span class="line">            Path jobStagingArea</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拿过该Job对应的ID  local  application.....</span></span><br><span class="line">            JobID jobId</span><br><span class="line"></span><br><span class="line">            <span class="comment">// jobStagingArea/jobid</span></span><br><span class="line">            Path submitJobDir</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拷贝job对应的信息到jobStagingArea/jobid</span></span><br><span class="line">            copyAndConfigureFiles(job, submitJobDir);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// ***** 完成我们输入数据的切片</span></span><br><span class="line">            <span class="keyword">int</span> maps = writeSplits(job, submitJobDir);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Write job file to submit dir</span></span><br><span class="line">            writeConf(conf, submitJobFile);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 提交我们的作业</span></span><br><span class="line">            submitClient.submitJob</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
     
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    <div class="article-pop-out tagcloud">
+      <i class="icon-tuding"></i>
+      <a class="article-tag-list-link color3">置顶</a>
+    </div>
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Hadoop//" class="article-tag-list-link color2">Hadoop</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/18/MapReduce%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
+  
+    <a href="/2020/03/02/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/08/%E5%8D%9A%E5%AE%A2%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">测试文章</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -271,8 +484,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

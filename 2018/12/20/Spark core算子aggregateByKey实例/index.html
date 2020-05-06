@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Spark core算子aggregateByKey实例groupbykey、reducebykey以及aggregateByKey groupbykey是全局聚合算子，将所有map task中的数据都拉取到shuffle中将key相同的数据进行聚合，它存在很多弊端，例如：将大量的数据进行网络传输，浪费大量的资源，最重要的是如果数据量太大还会出现GC和OutOfMemoryError的错误，如果数">
+  <meta name="description" content="Spark core算子aggregateByKey实例groupbykey、reducebykey以及aggregateByKey">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark core算子aggregateByKey实例">
 <meta property="og:url" content="http://yoursite.com/2018/12/20/Spark%20core%E7%AE%97%E5%AD%90aggregateByKey%E5%AE%9E%E4%BE%8B/index.html">
 <meta property="og:site_name" content="不积跬步无以至千里">
-<meta property="og:description" content="Spark core算子aggregateByKey实例groupbykey、reducebykey以及aggregateByKey groupbykey是全局聚合算子，将所有map task中的数据都拉取到shuffle中将key相同的数据进行聚合，它存在很多弊端，例如：将大量的数据进行网络传输，浪费大量的资源，最重要的是如果数据量太大还会出现GC和OutOfMemoryError的错误，如果数">
+<meta property="og:description" content="Spark core算子aggregateByKey实例groupbykey、reducebykey以及aggregateByKey">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-12-20T06:20:36.000Z">
-<meta property="article:modified_time" content="2020-05-06T09:41:28.671Z">
+<meta property="article:modified_time" content="2020-05-06T09:53:10.333Z">
 <meta property="article:author" content="Namikaze Minato">
 <meta property="article:tag" content="-spark core">
 <meta name="twitter:card" content="summary">
@@ -240,6 +240,8 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h1 id="Spark-core算子aggregateByKey实例"><a href="#Spark-core算子aggregateByKey实例" class="headerlink" title="Spark core算子aggregateByKey实例"></a>Spark core算子aggregateByKey实例</h1><p>groupbykey、reducebykey以及aggregateByKey</p>
+<a id="more"></a>
+
 <p>groupbykey是全局聚合算子，将所有map task中的数据都拉取到shuffle中将key相同的数据进行聚合，它存在很多弊端，例如：将大量的数据进行网络传输，浪费大量的资源，最重要的是如果数据量太大还会出现GC和OutOfMemoryError的错误，如果数据某个key的数据量远大于其他key的数据，在进行全局聚合的时候还会出现数据倾斜的问题。</p>
 <p>所以在实际的项目中要谨慎使用groupbykey，随着数据量的增加，groupbykey暴露出来的问题会越来越多。</p>
 <p>reducebykey是在map阶段进行本地聚合以后才会到shuffle中进行全局聚合，相当于是进入shuffle之前已经做了一部分聚合，那么它的网络传输速度会比groupbykey快很多而且占用资源也会减少很多，但是算子本身就如它的名字一样，主要是进行计算的将相同key的数据进行计算，返回计算结果。</p>
@@ -535,10 +537,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自述</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">spark core</a>
               </li>
              
@@ -547,15 +545,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">-spark core</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自述</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">-spark core</a>
               </li>
             
             <div class="clearfix"></div>

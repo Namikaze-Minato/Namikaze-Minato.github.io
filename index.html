@@ -220,32 +220,9 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h1 id="Spark-core算子aggregateByKey实例"><a href="#Spark-core算子aggregateByKey实例" class="headerlink" title="Spark core算子aggregateByKey实例"></a>Spark core算子aggregateByKey实例</h1><p>groupbykey、reducebykey以及aggregateByKey</p>
-<p>groupbykey是全局聚合算子，将所有map task中的数据都拉取到shuffle中将key相同的数据进行聚合，它存在很多弊端，例如：将大量的数据进行网络传输，浪费大量的资源，最重要的是如果数据量太大还会出现GC和OutOfMemoryError的错误，如果数据某个key的数据量远大于其他key的数据，在进行全局聚合的时候还会出现数据倾斜的问题。</p>
-<p>所以在实际的项目中要谨慎使用groupbykey，随着数据量的增加，groupbykey暴露出来的问题会越来越多。</p>
-<p>reducebykey是在map阶段进行本地聚合以后才会到shuffle中进行全局聚合，相当于是进入shuffle之前已经做了一部分聚合，那么它的网络传输速度会比groupbykey快很多而且占用资源也会减少很多，但是算子本身就如它的名字一样，主要是进行计算的将相同key的数据进行计算，返回计算结果。</p>
-<p>但是实际的项目中在进行聚合之后我们不一定只是要计算，还会找聚合后某个字段的最大值，最小值等等操作，groupbykey聚合后返回的是(K,Iterable[V]),我们可以把iterable[V]这个集合的数据进行二次处理来实现我们实际的项目需求，但是上面已经提到了groupbykey的诸多问题，reducebykey也是只有在单纯的对数据进行计算的时候才能和groupbykey有等价效果。既想像reducebykey那样进行本地聚合，又想像groupbykey那样返回一个集合便于我们操作。</p>
-<p>说了这么多也就引出来了我们今天的主题aggregatebykey。</p>
-<p>aggregatebykey和reducebykey一样首先在本地聚合，然后再在全局聚合。它的返回值也是由我们自己设定的。<br>aggregatebykey使用需要提供三个参数:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zeroValue: U 这个参数就会决定最后的返回类型</span><br><span class="line">seqOp: (U, V) =&gt; U 将V（数据）放入U中进行本地聚合</span><br><span class="line">combOp: (U, U) =&gt; U 将不同的U进行全局聚合</span><br></pre></td></tr></table></figure>
-
-<p>可能说的大家有点晕，那么我介绍一个工作中遇到的需求以及使用aggregatebykey来解决问题的实例：</p>
-<p>首先看数据的结构：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List(</span><br><span class="line">      (<span class="string">"84.174.205.5"</span>,(<span class="string">"2018-11-10 23:23:23"</span>,<span class="number">2</span>)),</span><br><span class="line">      (<span class="string">"221.226.113.146"</span>,(<span class="string">"2018-09-11 23:23:23"</span>,<span class="number">3</span>)),</span><br><span class="line">      (<span class="string">"84.174.205.5"</span>,(<span class="string">"2018-12-15 23:23:23"</span>,<span class="number">5</span>)),</span><br><span class="line">      (<span class="string">"108.198.168.20"</span>,(<span class="string">"2018-01-03 23:23:23"</span>,<span class="number">2</span>)),</span><br><span class="line">      (<span class="string">"108.198.168.20"</span>,(<span class="string">"2018-11-21 23:23:23"</span>,<span class="number">4</span>)),</span><br><span class="line">      (<span class="string">"221.226.113.146"</span>,(<span class="string">"2018-11-01 23:23:23"</span>,<span class="number">6</span>)),</span><br><span class="line">        (<span class="string">"221.226.113.146"</span>,(<span class="string">"2018-12-06 23:23:23"</span>,<span class="number">6</span>))</span><br><span class="line">      )</span><br></pre></td></tr></table></figure>
-
-<p>key为IP V为日期以及访问的次数。</p>
-<p>现在的需求：</p>
-<p>1、将ip的访问次数进行累加操作</p>
-<p>2、聚合后只保留最早的时间</p>
-<p>废话不多说上代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">val spark = SparkSession.builder().appName(test.getClass.getName).master(<span class="string">"local"</span>).getOrCreate()</span><br><span class="line"><span class="comment">//准备数据</span></span><br><span class="line">    val pairRdd: RDD[(String, (String, Int))] = spark.sparkContext.parallelize(</span><br><span class="line">      List(</span><br><span class="line">      (<span class="string">"84.174.205.5"</span>,(<span class="string">"2018-11-10 23:23:23"</span>,<span class="number">2</span>)),</span><br><span class="line">      (<span class="string">"221.226.113.146"</span>,(<span class="string">"2018-09-11 23:23:23"</span>,<span class="number">3</span>)),</span><br><span class="line">      (<span class="string">"84.174.205.5"</span>,(<span class="string">"2018-12-15 23:23:23"</span>,<span class="number">5</span>)),</span><br><span class="line">      (<span class="string">"108.198.168.20"</span>,(<span class="string">"2018-01-03 23:23:23"</span>,<span class="number">2</span>)),</span><br><span class="line">      (<span class="string">"108.198.168.20"</span>,(<span class="string">"2018-11-21 23:23:23"</span>,<span class="number">4</span>)),</span><br><span class="line">      (<span class="string">"221.226.113.146"</span>,(<span class="string">"2018-11-01 23:23:23"</span>,<span class="number">6</span>)),</span><br><span class="line">        (<span class="string">"221.226.113.146"</span>,(<span class="string">"2018-12-06 23:23:23"</span>,<span class="number">6</span>))</span><br><span class="line">      ),<span class="number">2</span>)</span><br><span class="line"><span class="comment">//运用aggregatebykey</span></span><br><span class="line"><span class="comment">//1、U定义为ArrayBuffer</span></span><br><span class="line">    val juhe = pairRdd.aggregateByKey(scala.collection.mutable.ArrayBuffer[(String, Int)]())((arr,value)=&gt;&#123;</span><br><span class="line"><span class="comment">//2、将value放入集合U中</span></span><br><span class="line">      arr += value</span><br><span class="line"><span class="comment">//3、将所有的集合进行合并</span></span><br><span class="line">    &#125;,_.union(_))</span><br><span class="line">    val juhesum = juhe.mapPartitions(partition=&gt;&#123;</span><br><span class="line">      partition.map(m=&gt;&#123;</span><br><span class="line">        val key = m._1</span><br><span class="line">        val date = m._2.map(m=&gt;m._1).toList.sortWith(_&lt;_)(<span class="number">0</span>)</span><br><span class="line">        val sum = m._2.map(m=&gt;m._2).sum</span><br><span class="line">        Row(key,date,sum)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    juhesum.foreach(println(_))</span><br></pre></td></tr></table></figure>
-
-<p>最后输出的结果：</p>
-<p>[108.198.168.20,2018-01-03 23:23:23,6]</p>
-<p>[84.174.205.5,2018-11-10 23:23:23,7]</p>
-<p>[221.226.113.146,2018-09-11 23:23:23,15]</p>
-<p>到此实现需求。</p>
-<p>希望本文会对大家有帮助，欢迎大家评论交流，谢谢！</p>
-
+    
+    <a class="article-more-a" href="/2018/12/20/Spark%20core%E7%AE%97%E5%AD%90aggregateByKey%E5%AE%9E%E4%BE%8B/#more">more >></a>
+    
     
 
     
@@ -869,10 +846,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">自述</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">spark core</a>
               </li>
              
@@ -881,15 +854,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">-spark core</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">自述</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">blog</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">-spark core</a>
               </li>
             
             <div class="clearfix"></div>

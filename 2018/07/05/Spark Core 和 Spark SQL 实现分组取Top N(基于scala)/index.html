@@ -17,18 +17,14 @@
 <meta property="og:site_name" content="不积跬步无以至千里">
 <meta property="og:description" content="Spark Core 和 Spark SQL 实现分组取Top N(基于scala)1、背景分组取Top N在日常需求中很多见：  每个班级分数前三名同学的名字以及分数 各省指标数量前三的市的名字   等等需求，主要思想就是在某一个分区（班级，省）中取出该分区Top N的数据:">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="c:%5CUsers%5Cxlkh%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200506160121853.png">
-<meta property="og:image" content="https://img-blog.csdn.net/20180705174718235?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI0Njc0MTMx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
-<meta property="og:image" content="https://img-blog.csdn.net/20180705175647423?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI0Njc0MTMx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==">
+<meta property="og:image" content="https://github.com/Namikaze-Minato/spark_img/blob/master/sparktopn1_1.png">
 <meta property="article:published_time" content="2018-07-05T09:59:02.000Z">
-<meta property="article:modified_time" content="2020-05-06T08:01:45.636Z">
+<meta property="article:modified_time" content="2020-05-06T08:34:52.434Z">
 <meta property="article:author" content="Namikaze Minato">
 <meta property="article:tag" content="spark core">
 <meta property="article:tag" content="spark sql">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:%5CUsers%5Cxlkh%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200506160121853.png">
+<meta name="twitter:image" content="https://github.com/Namikaze-Minato/spark_img/blob/master/sparktopn1_1.png">
   
     <link rel="alternative" href="/atom.xml" title="不积跬步无以至千里" type="application/atom+xml">
   
@@ -254,7 +250,7 @@
 <p>等等需求，主要思想就是在某一个分区（班级，省）中取出该分区Top N的数据:</p>
 <a id="more"></a>
 
-<h2 id="2、测试数据"><a href="#2、测试数据" class="headerlink" title="2、测试数据"></a>2、测试数据</h2><p><img src="C:%5CUsers%5Cxlkh%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200506160121853.png" alt="image-20200506160121853"></p>
+<h2 id="2、测试数据"><a href="#2、测试数据" class="headerlink" title="2、测试数据"></a>2、测试数据</h2><p><img src="https://github.com/Namikaze-Minato/spark_img/blob/master/sparktopn1_1.png" alt=""></p>
 <p>如上图，字段含义为，班级，学生姓名，分数</p>
 <p>下面我们通过一个Demo来实现各班级分数前三的学生姓名以及分数</p>
 <h2 id="通过spark-core实现"><a href="#通过spark-core实现" class="headerlink" title="通过spark core实现"></a>通过spark core实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//读取测试数据保存为rdd</span></span><br><span class="line">val rddtext = sc.textFile(<span class="string">"file:///C:/Users/chunyuhe/Desktop/test1.txt"</span>)</span><br><span class="line"><span class="comment">//将数据转化为Row形式（为下面Spark SQL 生成临时表用）</span></span><br><span class="line">val rowrdd = rddtext.map(m =&gt; Row(m.split(<span class="string">" "</span>)(<span class="number">0</span>), m.split(<span class="string">" "</span>)(<span class="number">1</span>), m.split(<span class="string">" "</span>)(<span class="number">2</span>).toInt))</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* spark core 实现分组取topN</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">val classrdd = rddtext.map(x =&gt; &#123;</span><br><span class="line"><span class="comment">//取到各数据并赋值给变量</span></span><br><span class="line">val classname = x.split(<span class="string">" "</span>)(<span class="number">0</span>)</span><br><span class="line">val name = x.split(<span class="string">" "</span>)(<span class="number">1</span>)</span><br><span class="line">val grade = x.split(<span class="string">" "</span>)(<span class="number">2</span>)</span><br><span class="line"><span class="comment">//生成一个便于计算的元组</span></span><br><span class="line">(classname, (name, grade.toInt))</span><br><span class="line">&#125;).groupByKey</span><br></pre></td></tr></table></figure>
@@ -269,13 +265,13 @@
 
 
 
-<p><strong><img src="https://img-blog.csdn.net/20180705174718235?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI0Njc0MTMx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></strong></p>
+
+
 <h2 id="2、通过Spark-sql实现："><a href="#2、通过Spark-sql实现：" class="headerlink" title="2、通过Spark sql实现："></a>2、通过Spark sql实现：</h2><p>`</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//隐式转换</span></span><br><span class="line"><span class="keyword">import</span> spark.implicits._</span><br><span class="line"><span class="keyword">import</span> spark.sql</span><br><span class="line"><span class="comment">//生成数据表表结构</span></span><br><span class="line">val schema = StructType(mutable.ArraySeq(</span><br><span class="line">StructField(<span class="string">"classname"</span>, StringType, <span class="keyword">true</span>),</span><br><span class="line">StructField(<span class="string">"name"</span>, StringType, <span class="keyword">true</span>),</span><br><span class="line">StructField(<span class="string">"grade"</span>, IntegerType, <span class="keyword">true</span>)))</span><br><span class="line"><span class="comment">//将表结构和表数据组合生成表</span></span><br><span class="line">val tablerow = spark.createDataFrame(rowrdd, schema)</span><br><span class="line"><span class="comment">//将生成的df转换为一个表并且命名</span></span><br><span class="line">tablerow.createTempView(<span class="string">"testtable"</span>)</span><br><span class="line">val tetrow = sql(<span class="string">"select * from testtable"</span>)</span><br><span class="line"><span class="comment">//tetrow.show()</span></span><br><span class="line"><span class="comment">//运用Spark sql 开窗函数进行计算</span></span><br><span class="line"><span class="comment">//PARTITION BY 为需要开窗字段</span></span><br><span class="line"><span class="comment">//ORDER BY 为需要排序字段</span></span><br><span class="line">val resultrow = sql(<span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">      select a.classname,a.name,a.grade from (select classname,name,grade,row_number() OVER (PARTITION BY classname ORDER BY grade DESC) rank from testtable) as a where a.rank &lt;= 3</span></span><br><span class="line"><span class="string">      "</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">resultrow.show()</span><br></pre></td></tr></table></figure>
 
 <p>`</p>
 <p>输出结果：</p>
-<p><img src="https://img-blog.csdn.net/20180705175647423?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI0Njc0MTMx/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img">)<img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
 <p>本文结束，希望能帮到大家，也希望大家批评指正！</p>
 
     

@@ -6,18 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/1 | 不积跬步无以至千里</title>
+  <title>Python之Paramiko方法封装（SFTPClient 篇） | 不积跬步无以至千里</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="日常工作问题总结">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不积跬步无以至千里">
-<meta property="og:url" content="http://yoursite.com/archives/2020/01/index.html">
+  <meta name="description" content="Python之Paramiko方法封装（SFTPClient 篇）Paramiko简介： Paramiko是基于Python(2.7，3.4+)版本实现和封装了SSHv2协议，底层是用cryptography实现，我们如果希望远程登录主机或者远程下载或者上传文件到远程主机都可以使用该库实现。Paramiko属于第三方python库，需要我们使用pip进行安装，如果是离线需要在有网络的环境下载好wh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python之Paramiko方法封装（SFTPClient 篇）">
+<meta property="og:url" content="http://yoursite.com/2019/07/12/Python%E4%B9%8BParamiko%E6%96%B9%E6%B3%95%E5%B0%81%E8%A3%85%EF%BC%88SFTPClient%20%E7%AF%87%EF%BC%89/index.html">
 <meta property="og:site_name" content="不积跬步无以至千里">
-<meta property="og:description" content="日常工作问题总结">
+<meta property="og:description" content="Python之Paramiko方法封装（SFTPClient 篇）Paramiko简介： Paramiko是基于Python(2.7，3.4+)版本实现和封装了SSHv2协议，底层是用cryptography实现，我们如果希望远程登录主机或者远程下载或者上传文件到远程主机都可以使用该库实现。Paramiko属于第三方python库，需要我们使用pip进行安装，如果是离线需要在有网络的环境下载好wh">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-07-12T07:10:42.000Z">
+<meta property="article:modified_time" content="2020-05-07T03:10:13.231Z">
 <meta property="article:author" content="Namikaze Minato">
+<meta property="article:tag" content="paramiko">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="不积跬步无以至千里" type="application/atom+xml">
@@ -183,80 +187,219 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Python之Paramiko方法封装（SFTPClient 篇）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/01/06/Spark%20JSONrdd%E5%92%8CDataframe%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" class="archive-article-date">
-        <time datetime="2020-01-06T03:24:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-06</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/01/06/Spark%20JSONrdd%E5%92%8CDataframe%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" target="_blank">Spark JSONrdd和Dataframe的互相转换</a>
   
+    <h1 class="article-title" itemprop="name">
+      Python之Paramiko方法封装（SFTPClient 篇）
     </h1>
   
 
 
-        <div class="article-info info-on-right">
-          
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2019/07/12/Python%E4%B9%8BParamiko%E6%96%B9%E6%B3%95%E5%B0%81%E8%A3%85%EF%BC%88SFTPClient%20%E7%AF%87%EF%BC%89/" class="archive-article-date">
+        <time datetime="2019-07-12T07:10:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">976字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">4分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="Python之Paramiko方法封装（SFTPClient-篇）"><a href="#Python之Paramiko方法封装（SFTPClient-篇）" class="headerlink" title="Python之Paramiko方法封装（SFTPClient 篇）"></a>Python之Paramiko方法封装（SFTPClient 篇）</h1><h2 id="Paramiko"><a href="#Paramiko" class="headerlink" title="Paramiko"></a>Paramiko</h2><p>简介：</p>
+<p>Paramiko是基于Python(2.7，3.4+)版本实现和封装了SSHv2协议，底层是用cryptography实现，我们如果希望远程登录主机或者远程下载或者上传文件到远程主机都可以使用该库实现。Paramiko属于第三方python库，需要我们使用pip进行安装，如果是离线需要在有网络的环境下载好whl文件，再到对应的离线环境进行安装。</p>
+<a id="more"></a>
+
+<p>主要功能：</p>
+<p>类似于SSH协议，Paramiko主要分为SSHClient和SFTPClient，前者主要对远程主机进行操作，输入命令对远程主机进行控制，后者主要实现了从远程主机上上传下载文件，除此之外还有很多实用的方法，本文主要是自己在工作中经常使用的方法进行封装，更多更全面的介绍请参考paramiko的api文档<a href="https://www.paramiko.org/" target="_blank" rel="noopener">https://www.paramiko.org/</a></p>
+<p>代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SSHConnection</span>:</span></span><br><span class="line">    <span class="comment">#初始化连接创建Transport通道</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,host=<span class="string">'xxx.xxx.xxx.xxx'</span>,port=<span class="number">22</span>,user=<span class="string">'xxx'</span>,pwd=<span class="string">'xxxxx'</span>)</span>:</span></span><br><span class="line">        self.host = host</span><br><span class="line">        self.port = port</span><br><span class="line">        self.user = user</span><br><span class="line">        self.pwd = pwd</span><br><span class="line">        self.__transport = paramiko.Transport((self.host,self.port))</span><br><span class="line">        self.__transport.connect(username=self.user,password=self.pwd)</span><br><span class="line">        self.sftp = paramiko.SFTPClient.from_transport(self.__transport)</span><br><span class="line">    <span class="comment">#关闭通道</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.sftp.close()</span><br><span class="line">        self.__transport.close()</span><br><span class="line">    <span class="comment">#上传文件到远程主机</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">upload</span><span class="params">(self,local_path,remote_path)</span>:</span></span><br><span class="line">        self.sftp.put(local_path,remote_path)</span><br><span class="line">    <span class="comment">#从远程主机下载文件到本地</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">download</span><span class="params">(self,local_path,remote_path)</span>:</span></span><br><span class="line">        self.sftp.get(remote_path,local_path)</span><br><span class="line">    <span class="comment">#在远程主机上创建目录</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mkdir</span><span class="params">(self,target_path,mode=<span class="string">'0777'</span>)</span>:</span></span><br><span class="line">        self.sftp.mkdir(target_path,mode)</span><br><span class="line">    <span class="comment">#删除远程主机上的目录</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rmdir</span><span class="params">(self,target_path)</span>:</span></span><br><span class="line">        self.sftp.rmdir(target_path)</span><br><span class="line">    <span class="comment">#查看目录下文件以及子目录（如果需要更加细粒度的文件信息建议使用listdir_attr）</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">listdir</span><span class="params">(self,target_path)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.sftp.listdir(target_path)</span><br><span class="line">    <span class="comment">#删除文件</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove</span><span class="params">(self,target_path)</span>:</span></span><br><span class="line">        self.sftp.remove(target_path)</span><br><span class="line">    <span class="comment">#查看目录下文件以及子目录的详细信息（包含内容和参考os.stat返回一个FSTPAttributes对象，对象的具体属性请用__dict__查看）</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">listdirattr</span><span class="params">(self,target_path)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            list = self.sftp.listdir_attr(target_path)</span><br><span class="line">        <span class="keyword">except</span> BaseException <span class="keyword">as</span> e:</span><br><span class="line">            print(e)</span><br><span class="line">        <span class="keyword">return</span> list</span><br><span class="line">    <span class="comment">#获取文件详情</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">stat</span><span class="params">(self,remote_path)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.sftp.stat(remote_path)</span><br><span class="line">    <span class="comment">#SSHClient输入命令远程操作主机</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cmd</span><span class="params">(self,command)</span>:</span></span><br><span class="line">        ssh = paramiko.SSHClient()</span><br><span class="line">        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)</span><br><span class="line">        ssh._transport = self.__transport</span><br><span class="line">        stdin, stdout, stderr = ssh.exec_command(command)</span><br><span class="line">        result = stdout.read()</span><br><span class="line">        print(result)</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<p>具体使用实例如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> paramikotools <span class="keyword">import</span> SSHConnection</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> cmdline <span class="keyword">import</span> parse_args</span><br><span class="line"><span class="keyword">from</span> util_log <span class="keyword">import</span> Logging</span><br><span class="line">ssh = <span class="literal">None</span></span><br><span class="line">logging = Logging().get_logger()</span><br><span class="line"><span class="comment">#递归遍历远程目录下的所有文件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gci</span><span class="params">(remote_path,pathlist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> ssh.listdirattr(remote_path):</span><br><span class="line">        <span class="keyword">if</span> (str(f.longname).split(<span class="string">" "</span>)[<span class="number">0</span>].startswith(<span class="string">'d'</span>)):</span><br><span class="line">            gci(os.path.join(remote_path,f.filename),pathlist)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pathlist.append(os.path.join(remote_path,f.filename))</span><br><span class="line">    <span class="keyword">return</span> pathlist</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment">#接收参数</span></span><br><span class="line">    args = parse_args()</span><br><span class="line">    <span class="comment">#初始化ssh</span></span><br><span class="line">    ssh = SSHConnection(host=args.srchost,user=args.srcuser,pwd=args.srcpasswd)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment">#创建本地接收文件目录（按天创建目录）</span></span><br><span class="line">            datedir = os.path.join(args.dstpath,datetime.datetime.now().strftime(<span class="string">'%Y%m%d'</span>))</span><br><span class="line">            <span class="comment">#创建子目录之前保证父级目录创建否则抛出异常</span></span><br><span class="line">            os.mkdir(args.dstpath)</span><br><span class="line">            os.mkdir(datedir)</span><br><span class="line">        <span class="keyword">except</span> BaseException <span class="keyword">as</span> e:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        beforedict = dict()</span><br><span class="line">        afterdict = dict()</span><br><span class="line">        pathlist = []</span><br><span class="line">        <span class="comment">#获取所有文件名以及每个文件的当前大小</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> gci(args.srcpath,pathlist):</span><br><span class="line">            beforedict.setdefault(i,ssh.stat(i).st_size)</span><br><span class="line">        <span class="comment">#隔interval秒获取每个文件名以及当前大小</span></span><br><span class="line">        time.sleep(int(args.interval))</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> gci(args.srcpath,pathlist):</span><br><span class="line">            afterdict.setdefault(i,ssh.stat(i).st_size)</span><br><span class="line">        <span class="comment">#对比时间前后文件大小如果一致认为文件已经生成完成，将文件下载到本地</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> beforedict.keys():</span><br><span class="line">            <span class="keyword">if</span> beforedict.get(i) == afterdict.get(i):</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    ssh.download(os.path.join(datedir,os.path.basename(i)),i)</span><br><span class="line">                    logging.info(<span class="string">'File '</span>+i+<span class="string">' download completed'</span>)</span><br><span class="line">                    ssh.remove(i)</span><br><span class="line">                    logging.info(<span class="string">'File '</span>+i+<span class="string">' deleted'</span>)</span><br><span class="line">                <span class="keyword">except</span> BaseException <span class="keyword">as</span> e:</span><br><span class="line">                    logging.error(<span class="string">'File '</span>+i+<span class="string">' download failed'</span>)</span><br><span class="line">                    logging.error(e)</span><br><span class="line">                    logging.error(<span class="string">'File '</span>+i+<span class="string">' delete failed'</span>)</span><br><span class="line">    ssh.close()</span><br></pre></td></tr></table></figure>
+
+<p>这是我在实际案例中所运用的paramiko的部分方法及其封装，希望能对大家有所帮助，具体更详细，更全面的方法请阅读paramiko官方的api接口，如果代码有问题希望大家批评指正，共同进步，本文到此结束，谢谢大家。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">spark core</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">paramiko</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">spark sql</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+    
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Spark//" class="article-tag-list-link color1">Spark</a>
+        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+    
 
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/12/Python%E4%B9%8BParamiko%E6%96%B9%E6%B3%95%E5%B0%81%E8%A3%85%EF%BC%88SFTPClient%20%E7%AF%87%EF%BC%89/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
+  
+    <a href="/2020/01/06/Spark%20JSONrdd%E5%92%8CDataframe%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Spark JSONrdd和Dataframe的互相转换
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/20/Spark%20core%E7%AE%97%E5%AD%90aggregateByKey%E5%AE%9E%E4%BE%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spark core算子aggregateByKey实例</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -297,8 +440,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

@@ -10,18 +10,18 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Spark Core 和 Spark SQL 实现分组取Top N(基于scala)1、背景分组取Top N在日常需求中很多见：  每个班级分数前三名同学的名字以及分数 各省指标数量前三的市的名字   等等需求，主要思想就是在某一个分区（班级，省）中取出该分区Top N的数据:">
+  <meta name="description" content="1、背景分组取Top N在日常需求中很多见：  每个班级分数前三名同学的名字以及分数 各省指标数量前三的市的名字   等等需求，主要思想就是在某一个分区（班级，省）中取出该分区Top N的数据:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark Core 和 Spark SQL 实现分组取Top N(基于scala)">
 <meta property="og:url" content="http://yoursite.com/2018/07/05/Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)/index.html">
 <meta property="og:site_name" content="不积跬步无以至千里">
-<meta property="og:description" content="Spark Core 和 Spark SQL 实现分组取Top N(基于scala)1、背景分组取Top N在日常需求中很多见：  每个班级分数前三名同学的名字以及分数 各省指标数量前三的市的名字   等等需求，主要思想就是在某一个分区（班级，省）中取出该分区Top N的数据:">
+<meta property="og:description" content="1、背景分组取Top N在日常需求中很多见：  每个班级分数前三名同学的名字以及分数 各省指标数量前三的市的名字   等等需求，主要思想就是在某一个分区（班级，省）中取出该分区Top N的数据:">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/img/spark_img/sparktopn1_1.png">
 <meta property="og:image" content="http://yoursite.com/img/spark_img/sparktopn1_2.png">
 <meta property="og:image" content="http://yoursite.com/img/spark_img/sparktopn1_3.png">
 <meta property="article:published_time" content="2018-07-05T09:59:02.000Z">
-<meta property="article:modified_time" content="2020-05-06T10:08:55.888Z">
+<meta property="article:modified_time" content="2020-05-07T04:02:30.020Z">
 <meta property="article:author" content="Namikaze Minato">
 <meta property="article:tag" content="spark core">
 <meta property="article:tag" content="spark sql">
@@ -224,7 +224,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">593字</span>
+      <span class="post-count">578字</span>
     </span>
   </span>
 
@@ -244,7 +244,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="Spark-Core-和-Spark-SQL-实现分组取Top-N-基于scala"><a href="#Spark-Core-和-Spark-SQL-实现分组取Top-N-基于scala" class="headerlink" title="Spark Core 和 Spark SQL 实现分组取Top N(基于scala)"></a>Spark Core 和 Spark SQL 实现分组取Top N(基于scala)</h1><h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>分组取Top N在日常需求中很多见：</p>
+    <h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>分组取Top N在日常需求中很多见：</p>
 <ol>
 <li><code>每个班级分数前三名同学的名字以及分数</code></li>
 <li>各省指标数量前三的市的名字 </li>
@@ -546,19 +546,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">paramiko</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Hadoop</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">paramiko</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">

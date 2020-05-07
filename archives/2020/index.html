@@ -6,27 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Spark Core 和 Spark SQL 实现分组取Top N(基于scala) | 不积跬步无以至千里</title>
+  <title>Archives: 2020 | 不积跬步无以至千里</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Spark Core 和 Spark SQL 实现分组取Top N(基于scala)1、背景分组取Top N在日常需求中很多见：  每个班级分数前三名同学的名字以及分数 各省指标数量前三的市的名字   等等需求，主要思想就是在某一个分区（班级，省）中取出该分区Top N的数据:">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Spark Core 和 Spark SQL 实现分组取Top N(基于scala)">
-<meta property="og:url" content="http://yoursite.com/2018/07/05/Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)/index.html">
+  <meta name="description" content="日常工作问题总结">
+<meta property="og:type" content="website">
+<meta property="og:title" content="不积跬步无以至千里">
+<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
 <meta property="og:site_name" content="不积跬步无以至千里">
-<meta property="og:description" content="Spark Core 和 Spark SQL 实现分组取Top N(基于scala)1、背景分组取Top N在日常需求中很多见：  每个班级分数前三名同学的名字以及分数 各省指标数量前三的市的名字   等等需求，主要思想就是在某一个分区（班级，省）中取出该分区Top N的数据:">
+<meta property="og:description" content="日常工作问题总结">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/img/spark_img/sparktopn1_1.png">
-<meta property="og:image" content="http://yoursite.com/img/spark_img/sparktopn1_2.png">
-<meta property="og:image" content="http://yoursite.com/img/spark_img/sparktopn1_3.png">
-<meta property="article:published_time" content="2018-07-05T09:59:02.000Z">
-<meta property="article:modified_time" content="2020-05-06T10:08:55.888Z">
 <meta property="article:author" content="Namikaze Minato">
-<meta property="article:tag" content="spark core">
-<meta property="article:tag" content="spark sql">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/img/spark_img/sparktopn1_1.png">
   
     <link rel="alternative" href="/atom.xml" title="不积跬步无以至千里" type="application/atom+xml">
   
@@ -191,97 +183,41 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Spark Core 和 Spark SQL 实现分组取Top N(基于scala)" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
+            
+  
+  
     
-      <header class="article-header">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/2020/01/06/Spark%20JSONrdd%E5%92%8CDataframe%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" class="archive-article-date">
+        <time datetime="2020-01-06T03:24:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-06</time>
+</a>
+
+        </div>
+    	 
   
+    <h1 itemprop="name">
+	
+	  <a class="archive-article-title" href="/2020/01/06/Spark%20JSONrdd%E5%92%8CDataframe%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" target="_blank">Spark JSONrdd和Dataframe的互相转换</a>
   
-    <h1 class="article-title" itemprop="name">
-      Spark Core 和 Spark SQL 实现分组取Top N(基于scala)
     </h1>
   
 
 
-  
-  
-        
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2018/07/05/Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)/" class="archive-article-date">
-        <time datetime="2018-07-05T09:59:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-05</time>
-</a>
-
-  
-  
-    
-<div style="margin-top:10px;">
-  <span class="post-time">
-    <span class="post-meta-item-icon">
-      <!-- fonts.scss -->
-      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
-      <i class="icon-statistics"></i>
-      <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">593字</span>
-    </span>
-  </span>
-
-  <span class="post-time">
-    &nbsp; | &nbsp;
-    <span class="post-meta-item-icon">
-      <i class="icon-book icon"></i>
-      <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">2分</span>
-    </span>
-  </span>
-</div>
-
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Spark-Core-和-Spark-SQL-实现分组取Top-N-基于scala"><a href="#Spark-Core-和-Spark-SQL-实现分组取Top-N-基于scala" class="headerlink" title="Spark Core 和 Spark SQL 实现分组取Top N(基于scala)"></a>Spark Core 和 Spark SQL 实现分组取Top N(基于scala)</h1><h2 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h2><p>分组取Top N在日常需求中很多见：</p>
-<ol>
-<li><code>每个班级分数前三名同学的名字以及分数</code></li>
-<li>各省指标数量前三的市的名字 </li>
-</ol>
-<p>等等需求，主要思想就是在某一个分区（班级，省）中取出该分区Top N的数据:</p>
-<a id="more"></a>
-
-<h2 id="2、测试数据"><a href="#2、测试数据" class="headerlink" title="2、测试数据"></a>2、测试数据</h2><p><img src="/img/spark_img/sparktopn1_1.png" alt=""></p>
-<p>如上图，字段含义为，班级，学生姓名，分数</p>
-<p>下面我们通过一个Demo来实现各班级分数前三的学生姓名以及分数</p>
-<h2 id="通过spark-core实现"><a href="#通过spark-core实现" class="headerlink" title="通过spark core实现"></a>通过spark core实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//读取测试数据保存为rdd</span></span><br><span class="line">val rddtext = sc.textFile(<span class="string">"file:///C:/Users/chunyuhe/Desktop/test1.txt"</span>)</span><br><span class="line"><span class="comment">//将数据转化为Row形式（为下面Spark SQL 生成临时表用）</span></span><br><span class="line">val rowrdd = rddtext.map(m =&gt; Row(m.split(<span class="string">" "</span>)(<span class="number">0</span>), m.split(<span class="string">" "</span>)(<span class="number">1</span>), m.split(<span class="string">" "</span>)(<span class="number">2</span>).toInt))</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* spark core 实现分组取topN</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">val classrdd = rddtext.map(x =&gt; &#123;</span><br><span class="line"><span class="comment">//取到各数据并赋值给变量</span></span><br><span class="line">val classname = x.split(<span class="string">" "</span>)(<span class="number">0</span>)</span><br><span class="line">val name = x.split(<span class="string">" "</span>)(<span class="number">1</span>)</span><br><span class="line">val grade = x.split(<span class="string">" "</span>)(<span class="number">2</span>)</span><br><span class="line"><span class="comment">//生成一个便于计算的元组</span></span><br><span class="line">(classname, (name, grade.toInt))</span><br><span class="line">&#125;).groupByKey</span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<p>(二班，CompactBuffer((小刚,88),(小小红,95),(小小赵,75),(大明,93)))</p>
-<p>(三班，CompactBuffer((小红,96),(小李,61),(小小明,99),(小小李,62),(大刚,81)))</p>
-<p>(一班，CompactBuffer((小明,94),(小赵,78),(小小刚,87),(大红,97),(大李,65),(大赵,77)))</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">classrdd.foreach(x =&gt; println(x))</span><br><span class="line">classrdd.map(m =&gt; &#123;</span><br><span class="line">val classname = m._1</span><br><span class="line"><span class="comment">//如上结果将各班级同学信息转化为Array数组并且安装成绩进行降序排列取前三</span></span><br><span class="line">val top3 = m._2.toArray.sortWith(_._2 &gt; _._2).take(<span class="number">3</span>)</span><br><span class="line">(classname, top3)</span><br><span class="line">&#125;).foreach(m =&gt; &#123;</span><br><span class="line">println(m._1 + <span class="string">"班级的前3名的成绩为"</span>)</span><br><span class="line">m._2.foreach(x =&gt; &#123;</span><br><span class="line">println(x)</span><br><span class="line">&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/img/spark_img/sparktopn1_2.png" alt=""></p>
-<h2 id="2、通过Spark-sql实现："><a href="#2、通过Spark-sql实现：" class="headerlink" title="2、通过Spark sql实现："></a>2、通过Spark sql实现：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//隐式转换</span></span><br><span class="line"><span class="keyword">import</span> spark.implicits._</span><br><span class="line"><span class="keyword">import</span> spark.sql</span><br><span class="line"><span class="comment">//生成数据表表结构</span></span><br><span class="line">val schema = StructType(mutable.ArraySeq(</span><br><span class="line">StructField(<span class="string">"classname"</span>, StringType, <span class="keyword">true</span>),</span><br><span class="line">StructField(<span class="string">"name"</span>, StringType, <span class="keyword">true</span>),</span><br><span class="line">StructField(<span class="string">"grade"</span>, IntegerType, <span class="keyword">true</span>)))</span><br><span class="line"><span class="comment">//将表结构和表数据组合生成表</span></span><br><span class="line">val tablerow = spark.createDataFrame(rowrdd, schema)</span><br><span class="line"><span class="comment">//将生成的df转换为一个表并且命名</span></span><br><span class="line">tablerow.createTempView(<span class="string">"testtable"</span>)</span><br><span class="line">val tetrow = sql(<span class="string">"select * from testtable"</span>)</span><br><span class="line"><span class="comment">//tetrow.show()</span></span><br><span class="line"><span class="comment">//运用Spark sql 开窗函数进行计算</span></span><br><span class="line"><span class="comment">//PARTITION BY 为需要开窗字段</span></span><br><span class="line"><span class="comment">//ORDER BY 为需要排序字段</span></span><br><span class="line">val resultrow = sql(<span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">      select a.classname,a.name,a.grade from (select classname,name,grade,row_number() OVER (PARTITION BY classname ORDER BY grade DESC) rank from testtable) as a where a.rank &lt;= 3</span></span><br><span class="line"><span class="string">      "</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">resultrow.show()</span><br></pre></td></tr></table></figure>
-
-<p>输出结果：</p>
-<p><img src="/img/spark_img/sparktopn1_3.png" alt=""></p>
-<p>本文结束，希望能帮到大家，也希望大家批评指正！</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -297,7 +233,7 @@
 		</ul>
 	</div>
 
-    
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -310,114 +246,17 @@
 	</div>
 
 
-    
-
-    
-    
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a> -->
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/05/Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)/" alt="微信分享二维码"> -->
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-
-    
-    <div class="clearfix"></div>
-  </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-<nav id="article-nav">
-  
-    <a href="/2018/12/20/Spark%20core%E7%AE%97%E5%AD%90aggregateByKey%E5%AE%9E%E4%BE%8B/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Spark core算子aggregateByKey实例
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/03/18/MapReduce%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MapReduce执行流程</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
 
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
           </div>
@@ -458,8 +297,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

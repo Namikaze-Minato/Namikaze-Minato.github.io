@@ -496,6 +496,109 @@
 
 
   
+    <article id="post-SparkCore分组取topN升级版以及SparkSQL API方式实现topN" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2018/09/10/SparkCore%E5%88%86%E7%BB%84%E5%8F%96topN%E5%8D%87%E7%BA%A7%E7%89%88%E4%BB%A5%E5%8F%8ASparkSQL%20API%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0topN/" target="_blank">SparkCore分组取topN升级版以及SparkSQL API方式实现topN</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2018/09/10/SparkCore%E5%88%86%E7%BB%84%E5%8F%96topN%E5%8D%87%E7%BA%A7%E7%89%88%E4%BB%A5%E5%8F%8ASparkSQL%20API%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0topN/" class="archive-article-date">
+        <time datetime="2018-09-10T06:21:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-10</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>本文是<a href="https://namikaze-minato.github.io/2018/07/05/Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)/文章的引申，上文中的分组求topN，在数据量过大的情况下会出现**OOM**的情况，因为groupby聚合以后可能某些key的数据太大，造成**OOM**，所以本文在之前的基础上进行优化，但是也有一定的局限性，所以建议对于spark" target="_blank" rel="noopener">https://namikaze-minato.github.io/2018/07/05/Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)/文章的引申，上文中的分组求topN，在数据量过大的情况下会出现**OOM**的情况，因为groupby聚合以后可能某些key的数据太大，造成**OOM**，所以本文在之前的基础上进行优化，但是也有一定的局限性，所以建议对于spark</a> core实现topN，可以将之前的方法和本次方法进行合并，根据实际业务进行合理运用。</p>
+    
+    <a class="article-more-a" href="/2018/09/10/SparkCore%E5%88%86%E7%BB%84%E5%8F%96topN%E5%8D%87%E7%BA%A7%E7%89%88%E4%BB%A5%E5%8F%8ASparkSQL%20API%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0topN/#more">more >></a>
+    
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">spark core</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">spark sql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spark//" class="article-tag-list-link color2">-Spark</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2018/09/10/SparkCore%E5%88%86%E7%BB%84%E5%8F%96topN%E5%8D%87%E7%BA%A7%E7%89%88%E4%BB%A5%E5%8F%8ASparkSQL%20API%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0topN/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Spark Core 和 Spark SQL 实现分组取Top N(基于scala)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1163,18 +1266,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">paramiko</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">spark core</a>
               </li>
              
@@ -1192,6 +1283,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">paramiko</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">MapReduce</a>
               </li>
             
             <div class="clearfix"></div>

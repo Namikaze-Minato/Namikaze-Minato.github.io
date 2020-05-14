@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | 不积跬步无以至千里</title>
+  <title>SparkCore分组取topN升级版以及SparkSQL API方式实现topN | 不积跬步无以至千里</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="日常工作问题总结">
-<meta property="og:type" content="website">
-<meta property="og:title" content="不积跬步无以至千里">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="描述本文是https:&#x2F;&#x2F;namikaze-minato.github.io&#x2F;2018&#x2F;07&#x2F;05&#x2F;Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)&#x2F;文章的引申，上文中的分组求topN，在数据量过大的情况下会出现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SparkCore分组取topN升级版以及SparkSQL API方式实现topN">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/SparkCore%E5%88%86%E7%BB%84%E5%8F%96topN%E5%8D%87%E7%BA%A7%E7%89%88%E4%BB%A5%E5%8F%8ASparkSQL%20API%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0topN/index.html">
 <meta property="og:site_name" content="不积跬步无以至千里">
-<meta property="og:description" content="日常工作问题总结">
+<meta property="og:description" content="描述本文是https:&#x2F;&#x2F;namikaze-minato.github.io&#x2F;2018&#x2F;07&#x2F;05&#x2F;Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)&#x2F;文章的引申，上文中的分组求topN，在数据量过大的情况下会出现">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/img/spark_img/sparktopn1_1.png">
+<meta property="article:published_time" content="2018-09-10T06:21:33.000Z">
+<meta property="article:modified_time" content="2020-05-14T06:25:41.430Z">
 <meta property="article:author" content="Namikaze Minato">
+<meta property="article:tag" content="spark core">
+<meta property="article:tag" content="spark sql">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/img/spark_img/sparktopn1_1.png">
   
     <link rel="alternative" href="/atom.xml" title="不积跬步无以至千里" type="application/atom+xml">
   
@@ -183,80 +189,304 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-SparkCore分组取topN升级版以及SparkSQL API方式实现topN" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2019/07/12/Python%E4%B9%8BParamiko%E6%96%B9%E6%B3%95%E5%B0%81%E8%A3%85%EF%BC%88SFTPClient%20%E7%AF%87%EF%BC%89/" class="archive-article-date">
-        <time datetime="2019-07-12T07:10:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2019/07/12/Python%E4%B9%8BParamiko%E6%96%B9%E6%B3%95%E5%B0%81%E8%A3%85%EF%BC%88SFTPClient%20%E7%AF%87%EF%BC%89/" target="_blank">Python之Paramiko方法封装（SFTPClient 篇）</a>
   
+    <h1 class="article-title" itemprop="name">
+      SparkCore分组取topN升级版以及SparkSQL API方式实现topN
     </h1>
   
 
 
-        <div class="article-info info-on-right">
-          
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2018/09/10/SparkCore%E5%88%86%E7%BB%84%E5%8F%96topN%E5%8D%87%E7%BA%A7%E7%89%88%E4%BB%A5%E5%8F%8ASparkSQL%20API%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0topN/" class="archive-article-date">
+        <time datetime="2018-09-10T06:21:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-10</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.1k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">4分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>本文是<a href="https://namikaze-minato.github.io/2018/07/05/Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)/文章的引申，上文中的分组求topN，在数据量过大的情况下会出现**OOM**的情况，因为groupby聚合以后可能某些key的数据太大，造成**OOM**，所以本文在之前的基础上进行优化，但是也有一定的局限性，所以建议对于spark" target="_blank" rel="noopener">https://namikaze-minato.github.io/2018/07/05/Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)/文章的引申，上文中的分组求topN，在数据量过大的情况下会出现**OOM**的情况，因为groupby聚合以后可能某些key的数据太大，造成**OOM**，所以本文在之前的基础上进行优化，但是也有一定的局限性，所以建议对于spark</a> core实现topN，可以将之前的方法和本次方法进行合并，根据实际业务进行合理运用。</p>
+<a id="more"></a>
+
+
+
+<p>为了和之前实验保持一致还是采用之前的数据：</p>
+<p><img src="/img/spark_img/sparktopn1_1.png" alt=""></p>
+<p>如上图 字段含义为：班级，学生姓名，分数</p>
+<h2 id="通过spark-core实现（增强版）"><a href="#通过spark-core实现（增强版）" class="headerlink" title="通过spark core实现（增强版）"></a>通过spark core实现（增强版）</h2><p>思路：</p>
+<p>1、自定义Partitioner将不同班级的学生分组，每个分组只有一个班级的学生。</p>
+<p>2、调用mappartitions算子，将每个partition的数据放到一个有序是TreeSet集合中。</p>
+<p>3、TreeSet自定义排序规则，对数据进行排序。</p>
+<p>4、根据需要获取的top n 对大于n的数据执行删除操作。</p>
+<p>这样设计的优点：</p>
+<p>不会出现oom的情况，因为每个只保留我们需要的n条数据。</p>
+<p>缺点：计算是可能会由于数据倾斜的问题，导致部分task执行速度慢，从而影响整个任务的执行时间。</p>
+<p>所以，针对于不同的业务场景，可以先计算一下key是否会倾斜，如果倾斜，将倾斜的key单独采用增强版方式处理，其他数据量少的可以采用之前的方法进行处理，所以具体使用需要对照实际场景进行相应优化。</p>
+<p>代码如下：`</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class TopNPartitioner(grades:Array[String]) extends Partitioner&#123;</span><br><span class="line">  val partitionMap = mutable.HashMap[String,Int]()</span><br><span class="line">  <span class="keyword">for</span>(i&lt;- <span class="number">0</span> until(grades.length))&#123;</span><br><span class="line">    partitionMap(grades(i)) = i</span><br><span class="line">  &#125;</span><br><span class="line">  override def numPartitions: Int = grades.length</span><br><span class="line"></span><br><span class="line">  <span class="function">override def <span class="title">getPartition</span><span class="params">(key: Any)</span>: Int </span>= &#123;</span><br><span class="line">    val domain = key.asInstanceOf[String]</span><br><span class="line">    partitionMap(domain)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>`继承partitioner 实现 numPartitions 和 getPartition算子</p>
+<p>主方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">val sparkconf = <span class="keyword">new</span> SparkConf().setMaster(<span class="string">"local[*]"</span>).setAppName(<span class="keyword">this</span>.getClass.getName)</span><br><span class="line">    val sc = <span class="keyword">new</span> SparkContext(sparkconf)</span><br><span class="line">    <span class="comment">//读取测试文件 将数据转换成((grade,name),score)格式</span></span><br><span class="line">    val processRDD = sc.textFile(<span class="string">"file:///读取文件"</span>).map(m=&gt;&#123;</span><br><span class="line">      val splits = m.split(<span class="string">"\t"</span>)</span><br><span class="line">      val grade = splits(<span class="number">0</span>)</span><br><span class="line">      val name = splits(<span class="number">1</span>)</span><br><span class="line">      val score = splits(<span class="number">2</span>).toInt</span><br><span class="line">      (grade,(name,score))</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//将grade作为分区字段</span></span><br><span class="line">    val grades = processRDD.map(_._1).distinct().collect()</span><br><span class="line">    val result = processRDD.partitionBy(<span class="keyword">new</span> TopNPartitioner(grades))</span><br><span class="line">    <span class="comment">//对每个partition分区进行排序</span></span><br><span class="line">    val re = result.mapPartitions(partition=&gt;&#123;</span><br><span class="line">      <span class="comment">//运用TreeSet有序集合，在添加元素的时候就进行排序</span></span><br><span class="line">      <span class="comment">//自定义排序</span></span><br><span class="line">      val set = <span class="keyword">new</span> mutable.TreeSet[(String,(String,Int))]()(Ordering[(String,(String,Int))]((x,y)=&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(!x._1.equals(y._1)&amp;&amp;x._2._2 - y._2._2 == <span class="number">0</span>)</span><br><span class="line">          <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">          -(x._2._2-y._2._2)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;))</span><br><span class="line">      partition.foreach(m=&gt;&#123;</span><br><span class="line">        <span class="comment">//添加元素，如果求TOP3 则判断如果set内数据大于3 则删除排在后面的数据</span></span><br><span class="line">        set.add(m)</span><br><span class="line">        <span class="keyword">if</span>(set.size &gt; <span class="number">3</span>)</span><br><span class="line">          &#123;</span><br><span class="line">            set.remove(set.last)</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      set.toList.iterator</span><br><span class="line">    &#125;</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">//输出</span></span><br><span class="line">    re.foreachPartition(partition=&gt;&#123;</span><br><span class="line">      partition.foreach(f=&gt;&#123;</span><br><span class="line">        println(f._1,f._2,TaskContext.getPartitionId())</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      sc.stop()</span><br></pre></td></tr></table></figure>
+
+<p>为了展示效果，输出是加上了分区id，最终输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(二班,(小小红,95),1)</span><br><span class="line">(二班,(大明,93),1)</span><br><span class="line">(二班,(小刚,88),1)</span><br><span class="line">(三班,(小小明,99),0)</span><br><span class="line">(三班,(小红,96),0)</span><br><span class="line">(三班,(大刚,81),0)</span><br><span class="line">(一班,(大红,97),2)</span><br><span class="line">(一班,(小明,94),2)</span><br><span class="line">(一班,(小小刚,87),2)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Spark-SQL-API实现"><a href="#Spark-SQL-API实现" class="headerlink" title="Spark SQL API实现"></a>Spark SQL API实现</h2><p>本次采用Spark SQL API的方式实现分组排序，之前是采用createTempView的方式运用sql语句实现。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">main</span><span class="params">(args: Array[String])</span>: Unit </span>= &#123;</span><br><span class="line">    val spark = SparkSession.builder().master(<span class="string">"local[*]"</span>).appName(<span class="keyword">this</span>.getClass.getName).getOrCreate()</span><br><span class="line">    val df: DataFrame = spark.read.format(<span class="string">"text"</span>).load(<span class="string">"file:///读取文件"</span>)</span><br><span class="line">    <span class="keyword">import</span> spark.implicits._</span><br><span class="line"></span><br><span class="line">    val rddrow: DataFrame = df.rdd.map(m=&gt;&#123;</span><br><span class="line">      val splits = m(<span class="number">0</span>).toString.split(<span class="string">"\t"</span>)</span><br><span class="line">      Student(splits(<span class="number">0</span>),splits(<span class="number">1</span>),splits(<span class="number">2</span>).toInt)</span><br><span class="line">    &#125;).</span><br><span class="line">      toDF()</span><br><span class="line">    val win = Window.partitionBy(<span class="string">'grade).orderBy('</span>score.desc)</span><br><span class="line">    rddrow.withColumn(<span class="string">"rank"</span>,row_number.over(win)).where(<span class="string">'rank &lt;=3)</span></span><br><span class="line"><span class="string">        .show()</span></span><br><span class="line"><span class="string">    spark.stop()</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  case class Student(grade:String, name:String, score:Int)</span></span><br></pre></td></tr></table></figure>
+
+<p>最终结果：</p>
+<table>
+<thead>
+<tr>
+<th align="center">grade</th>
+<th align="center">name</th>
+<th align="center">score</th>
+<th align="center">rank</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">三班</td>
+<td align="center">小小明</td>
+<td align="center">99</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">三班</td>
+<td align="center">小红</td>
+<td align="center">96</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">三班</td>
+<td align="center">大刚</td>
+<td align="center">81</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">二班</td>
+<td align="center">小小红</td>
+<td align="center">95</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">二班</td>
+<td align="center">大明</td>
+<td align="center">93</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">二班</td>
+<td align="center">小刚</td>
+<td align="center">88</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">一班</td>
+<td align="center">大红</td>
+<td align="center">97</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">一班</td>
+<td align="center">小明</td>
+<td align="center">94</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">一班</td>
+<td align="center">小小刚</td>
+<td align="center">87</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<p>其中rank为窗口编号，可以忽略。</p>
+<p>本文到此结束，希望能帮到大家。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">paramiko</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">spark core</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">spark sql</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+    
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
+        			<a href="/categories/Spark//" class="article-tag-list-link color2">-Spark</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+    
 
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/09/10/SparkCore%E5%88%86%E7%BB%84%E5%8F%96topN%E5%8D%87%E7%BA%A7%E7%89%88%E4%BB%A5%E5%8F%8ASparkSQL%20API%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0topN/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
+  
+    <a href="/2018/12/20/Spark%20core%E7%AE%97%E5%AD%90aggregateByKey%E5%AE%9E%E4%BE%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Spark core算子aggregateByKey实例
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/05/Spark%20Core%20%E5%92%8C%20Spark%20SQL%20%E5%AE%9E%E7%8E%B0%E5%88%86%E7%BB%84%E5%8F%96Top%20N(%E5%9F%BA%E4%BA%8Escala)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spark Core 和 Spark SQL 实现分组取Top N(基于scala)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -297,8 +527,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
